@@ -1,0 +1,20 @@
+# Save as azure-pipelines.yml (or a template of it). Set the pipeline variable ADLC_SERVER (the Workbench API address) and the secret variable ADLC_CI_TOKEN (a CI token from the Workbench).
+trigger: none
+pr:
+  branches:
+    include: [main]
+pool:
+  vmImage: ubuntu-latest
+steps:
+  - checkout: self
+    fetchDepth: 0
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '20.x'
+  - script: test -f adlc.mjs || curl -fsSL -o adlc.mjs "$(ADLC_SERVER)/api/developer/cli"
+    displayName: Get the program (skipped when it is committed)
+  - script: node adlc.mjs evaluate --base "origin/$(System.PullRequest.TargetBranch)" --report --enforce
+    displayName: Evaluate against the Workbench's rules
+    env:
+      ADLC_SERVER: $(ADLC_SERVER)
+      ADLC_CI_TOKEN: $(ADLC_CI_TOKEN)

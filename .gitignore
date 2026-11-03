@@ -1,0 +1,9 @@
+# adlc.mjs: this machine's connection and state (never commit)
+.workbench/local.json
+.workbench/state.json
+.workbench/current-task.json
+.workbench/watch.pid
+.workbench/watch.log
+.workbench/queue.jsonl
+.workbench/telemetry.json
+.workbench/usage-state.json
