@@ -1,0 +1,39 @@
+{
+  "schema": "adlc.hooks/1",
+  "note": "Merged into .claude/settings.json by `node adlc.mjs pull`. Entries that run adlc.mjs are replaced; your own are left alone.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/adlc.mjs\" hook session-start",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/adlc.mjs\" hook stop",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/adlc.mjs\" hook session-end",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
